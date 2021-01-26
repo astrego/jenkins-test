@@ -1,4 +1,3 @@
-
 pipeline {
   agent any
     
@@ -6,24 +5,22 @@ pipeline {
     
   stages {
         
-    stage('Git') {
+    stage('Cloning Git') {
       steps {
         git 'https://github.com/astrego/jenkins-test.git'
       }
     }
-     
-    stage('Build') {
+        
+    stage('Install dependencies') {
       steps {
         sh 'npm install'
-         sh ''
-      }
-    }  
-    
-            
-    stage('Test') {
-      steps {
-        sh 'npm run test'
       }
     }
+     
+    stage('Test') {
+      steps {
+         sh 'npm test'
+      }
+    }      
   }
 }
