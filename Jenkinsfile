@@ -1,11 +1,29 @@
+
 pipeline {
-    agent { docker { image 'node:14-alpine' } }
-    stages {
-        stage('test') {
-            steps {
-                sh 'npm --version'
-                sh 'npm run test'
-            }
-        }
+  agent any
+    
+  tools {nodejs "node"}
+    
+  stages {
+        
+    stage('Git') {
+      steps {
+        git 'https://github.com/astrego/jenkins-test.git'
+      }
     }
+     
+    stage('Build') {
+      steps {
+        sh 'npm install'
+         sh ''
+      }
+    }  
+    
+            
+    stage('Test') {
+      steps {
+        sh 'npm run test'
+      }
+    }
+  }
 }
