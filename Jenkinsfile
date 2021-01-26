@@ -13,13 +13,20 @@ pipeline {
         
     stage('Install dependencies') {
       steps {
-        sh 'npm install'
+        sh 'npm i -g parcel-bundler'
+        sh 'npm ci'
       }
     }
      
     stage('Test') {
       steps {
          sh 'npm test'
+      }
+    }
+
+    stage('Build') {
+      steps {
+        sh 'npm build'
       }
     }      
   }
